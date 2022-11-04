@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE PubmedArticleSet SYSTEM "http://dtd.nlm.nih.gov/ncbi/pubmed/out/pubmed_190101.dtd">
 <PubmedArticleSet>
-<PubmedArticle>
+  <PubmedArticle>
     <MedlineCitation Status="MEDLINE" Owner="NLM">
       <PMID Version="1">1</PMID>
       <DateCompleted>
@@ -625,20 +625,4 @@
       </ArticleIdList>
     </PubmedData>
   </PubmedArticle>
-</PubmedArticleSet>1: 
-2: 1
-3: 2
-4: 4
-5: 8
-1: 1
-2: 2
-3: 4
-4: 8
-1: 1
-2: 2
-3: 4
-4: 8
-1: 1
-2: 2
-3: 4
-4: 8
+</PubmedArticleSet>
