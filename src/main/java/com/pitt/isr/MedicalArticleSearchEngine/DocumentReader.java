@@ -5,15 +5,21 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.pitt.isr.config.Path;
+import com.pitt.isr.config.*;
+import java.util.List;
+/**
 import com.pitt.isr.indexing.MyIndexReader;
 import com.pitt.isr.indexing.MyIndexWriter;
 import com.pitt.isr.indexing.PreProcessedCorpusReader;
-import com.pitt.isr.pre.process.data.DocumentCollection;
+/** import com.pitt.isr.pre.process.data.DocumentCollection;
 import com.pitt.isr.pre.process.data.StopWordRemover;
 import com.pitt.isr.pre.process.data.TrectextCollection;
 import com.pitt.isr.pre.process.data.WordNormalizer;
-import com.pitt.isr.pre.process.data.WordTokenizer;
+//import com.pitt.isr.pre.process.data.WordTokenizer; **/
+import com.pitt.isr.indexing.*;
+import com.pitt.isr.pre.process.data.*;
+import com.pitt.isr.Search.*;
+
 
 public class DocumentReader {
 
@@ -26,6 +32,32 @@ public class DocumentReader {
 		System.out.println("Index text corpus, running time: "+(endTime-startTime)/60000.0+" min");
 
 		createIndex();
+
+		// Open index
+		MyIndexReader ixreader = new MyIndexReader("trectext");
+		// Initialize the MyRetrievalModel
+		QueryRetrievalModel model = new QueryRetrievalModel(ixreader);
+		// Extract the queries
+		ExtractQuery queries = new ExtractQuery();
+		
+		while (queries.hasNext()) {
+		  Query aQuery = queries.next();
+		  System.out.println(aQuery.GetTopicId() + "\t" + aQuery.GetQueryContent());
+		  // conduct retrieval on the index for each topic, and return top 20 documents
+		  List<Document> results = model.retrieveQuery(aQuery, 20);
+		  if (results != null) {
+			int rank = 1;
+			for (Document result : results) {
+			  System.out.println(aQuery.GetTopicId() + " Q0 " + result.docno() + " " + rank + " "
+				  + result.score() + " MYRUN");
+			  rank++;
+			}
+		  }
+		}
+		
+		System.out.println("\n\n4 queries search time: " + (endTime - startTime) / 60000.0 + " min");
+		//ixreader.close();
+
 	}
 
 	private static void createIndex() throws IOException {

@@ -14,4 +14,5 @@ public class Path {
 	//public static String OutputWebDir = "data//results.trecweb";// address of result.trectext file
 	public static String OutputTextDir = "data//results.trectext";// address of result.trectext file
 
+	public static String TopicDir = "data//topics.xml";// address of topics.txt
 }
